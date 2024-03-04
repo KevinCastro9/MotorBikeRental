@@ -1,0 +1,39 @@
+CREATE TABLE tbl_user (
+ id_user SERIAL PRIMARY KEY,
+ user_name varchar(300) UNIQUE NOT NULL, 
+ password varchar(200) NOT null,
+ role varchar(100)  NOT null,
+ status int NOT NULL
+);
+
+CREATE TABLE tbl_motorcycle (
+ ID_Motorcycle SERIAL PRIMARY KEY,
+ Ano int NOT NULL, 
+ Modelo varchar(50) NOT NULL,
+ Placa varchar(7) UNIQUE NOT null,
+ status_locacao int NOT NULL
+);
+
+CREATE TABLE tbl_locacao (
+ id_locacao SERIAL PRIMARY KEY,
+ start_date date   NOT NULL,
+ end_date date  NOT NULL,
+ value_forecast FLOAT NOT NULL,
+ ID_Motorcycle int NOT NULL,
+ id_deliveryman int NOT NULL,
+ status int NOT null,
+ FOREIGN KEY (ID_Motorcycle) REFERENCES tbl_motorcycle (ID_Motorcycle),
+ FOREIGN KEY (id_deliveryman) REFERENCES tbl_deliveryman (id_deliveryman)
+);
+
+CREATE TABLE tbl_deliveryman (
+ id_deliveryman SERIAL PRIMARY KEY,
+ user_name varchar(300) NOT NULL,
+ password varchar(200) NOT null,
+ cnpj varchar(18) UNIQUE NOT NULL,
+ date_nasc date NOT NULL,
+ cod_cnh varchar(9) unique NOT NULL,
+ type_nch varchar(2) NOT NULL,
+ path_cnh varchar(500) NOT NULL,
+ status int NOT null
+);
